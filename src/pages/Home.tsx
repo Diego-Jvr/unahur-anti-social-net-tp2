@@ -5,11 +5,20 @@ function Home() {
 
     useEffect(() => {
 
-        fetch(`${API_URL}/users`)
-            .then(response => response.json())
-            .then(data => {
+        const obtenerUsuarios = async () => {
+            try {
+                const response = await fetch(`${API_URL}/users`);
+
+                const data = await response.json();
+
                 console.log(data);
-            });
+
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        obtenerUsuarios();
 
     }, []);
 
