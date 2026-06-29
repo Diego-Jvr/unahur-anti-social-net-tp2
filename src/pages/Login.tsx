@@ -9,28 +9,28 @@ function Login() {
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const [nickName, setNickName] = useState("");
+    const [Usuario, setNickName] = useState("");
     const [password, setPassword] = useState("");
 
     const handleLogin = async () => {
         try {
-            // 1. Pedimos todos los usuarios
+
             const response = await fetch(`${API_URL}/users`);
 
-            // 2. Convertimos la respuesta a JSON
+
             const users: User[] = await response.json();
 
-            // 3. Buscamos un usuario con el nickname ingresado
+            
             const user = users.find(
-                (u) => u.nickName === nickName
+                (u) => u.nickName === Usuario
             );
 
-            // 4. Validamos usuario y contraseña
+            
             if (user && password === "123456") {
                 login(user);
                 navigate("/profile");
             } else {
-                alert("Nickname o contraseña incorrectos");
+                alert("Usuario o contraseña incorrectos");
             }
 
         } catch (error) {
@@ -45,8 +45,8 @@ function Login() {
 
             <input
                 type="text"
-                placeholder="Nickname"
-                value={nickName}
+                placeholder="Usuario"
+                value={Usuario}
                 onChange={(e) => setNickName(e.target.value)}
             />
 

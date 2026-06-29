@@ -1,29 +1,56 @@
-import { useEffect } from "react";
-import API_URL from "../services/api";
+import { useEffect, useState } from "react";
+import { getPosts } from "../services/postService";
+import type { Post } from "../types/Post";
 
 function Home() {
 
+    const [posts, setPosts] = useState<Post[]>([]);
+
     useEffect(() => {
 
-        const obtenerUsuarios = async () => {
+        const cargarPosts = async () => {
+
             try {
-                const response = await fetch(`${API_URL}/users`);
 
-                const data = await response.json();
+                const data = await getPosts();
 
-                console.log(data);
+                setPosts(data);
 
             } catch (error) {
+
                 console.error(error);
+
             }
+
         };
 
-        obtenerUsuarios();
+        cargarPosts();
 
     }, []);
 
     return (
-        <h1>Home</h1>
+        <>
+            <h1>Home</h1>
+
+            {posts.map((post) => (
+                <div key={post.id}>
+
+                    <h3>{post.User.nickName}</h3>
+
+                    <p>{post.description}</p>
+
+                    <p>
+                        Etiquetas:
+                        {" "}
+                        {post.Tags.map(tag => tag.name).join(", ")}
+                    </p>
+
+                    <hr />
+
+                </div>
+            ))}
+
+        </>
     );
 }
 
