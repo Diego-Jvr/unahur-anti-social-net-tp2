@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import type { Comment } from "../types/Comment";
 import type { Post } from "../types/Post";
-import {getPostById, getPostImages, getComments} from "../services/postService";
-import type { PostImage } from "../types/postImage";
+import type { PostImage } from "../types/PostImage";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import {getPostById, getPostImages, getComments, createComment} from "../services/postService";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 function PostDetail() {
 
@@ -11,7 +13,9 @@ function PostDetail() {
 
     const [post, setPost] = useState<Post | null>(null);
     const [images, setImages] = useState<PostImage[]>([]);
-    const [comments, setComments] = useState<Comment[]>([]);
+    const [comments, setComments] = useState<Comment[]>([]); 
+    const { user } = useContext(AuthContext);
+    const [content, setContent] = useState("");
     
 
     useEffect(() => {
@@ -43,6 +47,40 @@ function PostDetail() {
         cargarPost();
 
     }, [id]);
+
+    const handleCreateComment = async () => {
+
+        if (!user) return;  
+
+        if (!content.trim()) {
+
+            alert("Escribí un comentario.");
+
+            return;
+
+        }
+
+        try {
+
+            await createComment(
+                content,
+                user.id,
+                Number(id)
+            );
+
+            alert("Comentario agregado.");
+
+            setContent("");
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert("No se pudo crear el comentario.");
+
+        }
+
+    };
 
     if (!post) {
         return <p>Cargando publicación...</p>;
@@ -97,6 +135,20 @@ function PostDetail() {
                 ))
 
             )}
+
+            <h3>Agregar comentario</h3>
+
+            <textarea
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                placeholder="Escribí un comentario..."
+            />
+
+            <br />
+
+            <button onClick={handleCreateComment}>
+                Comentar
+            </button>
 
         </>
     );

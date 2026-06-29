@@ -1,6 +1,6 @@
 import API_URL from "./api";
 import type { Post } from "../types/Post";
-import type { PostImage } from "../types/postImage";
+import type { PostImage } from "../types/PostImage";
 import type { Comment } from "../types/Comment";
 
 export async function getPosts(): Promise<Post[]> {
@@ -45,4 +45,61 @@ export async function getComments(postId: number): Promise<Comment[]> {
     }
 
     return await response.json();
+}
+
+    export async function createPost(
+        description: string,
+        userId: number
+    ): Promise<Post> {
+
+    const response = await fetch(`${API_URL}/posts`, {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+            description,
+            userId
+        })
+
+    });
+
+    if (!response.ok) {
+        throw new Error("Error al crear la publicación");
+    }
+
+    return await response.json();
+}
+
+export async function createComment(
+    content: string,
+    userId: number,
+    postId: number
+) {
+
+    const response = await fetch(`${API_URL}/comments`, {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+            content,
+            userId,
+            postId
+        })
+
+    });
+
+    if (!response.ok) {
+        throw new Error("Error al crear el comentario");
+    }
+
+    return await response.json();
+
 }

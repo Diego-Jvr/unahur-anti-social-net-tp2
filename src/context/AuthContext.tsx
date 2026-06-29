@@ -1,5 +1,5 @@
-import { createContext } from "react";
 import type { User } from "../types/User";
+import { createContext } from "react";
 import { useState, useEffect } from "react";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {

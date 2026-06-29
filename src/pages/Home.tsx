@@ -1,6 +1,6 @@
+import type { Post } from "../types/Post";
 import { useEffect, useState } from "react";
 import { getPosts } from "../services/postService";
-import type { Post } from "../types/Post";
 
 function Home() {
 

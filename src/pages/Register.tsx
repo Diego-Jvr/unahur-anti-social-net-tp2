@@ -3,74 +3,74 @@ import { useNavigate } from "react-router-dom";
 import API_URL from "../services/api";
 
 function Register() {
-    const navigate = useNavigate();
 
+    const navigate = useNavigate();
     const [nickName, setNickName] = useState("");
     const [email, setEmail] = useState("");
     const handleRegister = async () => {
 
-    if (!nickName || !email) {
-        alert("Completa todos los campos");
-        return;
-    }
-
-    try {
-
-        const response = await fetch(`${API_URL}/users`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                nickName,
-                email
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error("Error al crear usuario");
+        if (!nickName || !email) {
+            alert("Completa todos los campos");
+            return;
         }
 
-        alert("Usuario registrado correctamente");
+        try {
 
-        navigate("/login");
+            const response = await fetch(`${API_URL}/users`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nickName,
+                    email
+                })
+            });
 
-    } catch (error) {
+            if (!response.ok) {
+                throw new Error("Error al crear usuario");
+            }
 
-        console.error(error);
+            alert("Usuario registrado correctamente");
 
-        alert("No se pudo registrar el usuario");
+            navigate("/login");
 
-    }
-};
+        } catch (error) {
 
-    return (
-    <>
-        <h1>Registro</h1>
+            console.error(error);
 
-        <input
-            type="text"
-            placeholder="Nickname"
-            value={nickName}
-            onChange={(e) => setNickName(e.target.value)}
-        />
+            alert("No se pudo registrar el usuario");
 
-        <br /><br />
+        }
+    };
 
-        <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-        />
+        return (
+        <>
+            <h1>Registro</h1>
 
-        <br /><br />
+            <input
+                type="text"
+                placeholder="Nickname"
+                value={nickName}
+                onChange={(e) => setNickName(e.target.value)}
+            />
 
-        <button onClick={handleRegister}>
-            Registrarse
-        </button>
-    </>
-);
+            <br /><br />
+
+            <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <br /><br />
+
+            <button onClick={handleRegister}>
+                Registrarse
+            </button>
+        </>
+    );
 }
 
 export default Register;
