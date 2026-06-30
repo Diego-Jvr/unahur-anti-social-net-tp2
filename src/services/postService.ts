@@ -49,7 +49,8 @@ export async function getComments(postId: number): Promise<Comment[]> {
 
     export async function createPost(
         description: string,
-        userId: number
+        userId: number,
+        tagIds: number[]
     ): Promise<Post> {
 
     const response = await fetch(`${API_URL}/posts`, {
@@ -62,7 +63,8 @@ export async function getComments(postId: number): Promise<Comment[]> {
 
         body: JSON.stringify({
             description,
-            userId
+            userId,
+            tagIds
         })
 
     });

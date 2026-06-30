@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import CreatePost from "./pages/CreatePost";
 import PostDetail from "./pages/PostDetail";
 import Navbar from "./components/Navbar";
+
 function App() {
   return (
     <BrowserRouter>
