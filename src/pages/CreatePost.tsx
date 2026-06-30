@@ -2,7 +2,7 @@ import type { Tag } from "../types/Tag";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { createPost } from "../services/postService";
+import { createPost,createPostImage } from "../services/postService";
 import { useEffect } from "react";
 import { getTags } from "../services/tagService";
 
@@ -13,6 +13,7 @@ function CreatePost() {
     const navigate = useNavigate();
 
     const [description, setDescription] = useState("");
+    const [imageUrl, setImageUrl] = useState("");
     const [tags, setTags] = useState<Tag[]>([]);
     const [selectedTags, setSelectedTags] = useState<number[]>([]);
 
@@ -52,7 +53,13 @@ function CreatePost() {
 
         try {
 
-            await createPost(description, user.id, selectedTags);
+            const newPost = await createPost(description, user.id, selectedTags);
+            
+            if (imageUrl.trim()) {
+
+                await createPostImage (imageUrl,newPost.id);
+
+            }
 
             alert("Publicación creada");
 
@@ -85,6 +92,20 @@ function CreatePost() {
             />
 
             <br />
+
+            <br />
+
+            <input
+
+                type="text"
+
+                placeholder="URL de la imagen"
+
+                value={imageUrl}
+
+                onChange={(e) => setImageUrl(e.target.value)}
+
+            />
 
             <button onClick={handleCreatePost}>
 

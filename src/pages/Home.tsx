@@ -1,6 +1,7 @@
 import type { Post } from "../types/Post";
 import { useEffect, useState } from "react";
 import { getPosts } from "../services/postService";
+import PostCard from "../components/Postcard";
 
 function Home() {
 
@@ -31,23 +32,14 @@ function Home() {
     return (
         <>
             <h1>Home</h1>
-
+            
             {posts.map((post) => (
-                <div key={post.id}>
 
-                    <h3>{post.User.nickName}</h3>
+                <PostCard
+                    key={post.id}
+                    post={post}
+                />
 
-                    <p>{post.description}</p>
-
-                    <p>
-                        Etiquetas:
-                        {" "}
-                        {post.Tags.map(tag => tag.name).join(", ")}
-                    </p>
-
-                    <hr />
-
-                </div>
             ))}
 
         </>

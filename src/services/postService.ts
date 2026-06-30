@@ -47,10 +47,11 @@ export async function getComments(postId: number): Promise<Comment[]> {
     return await response.json();
 }
 
-    export async function createPost(
-        description: string,
-        userId: number,
-        tagIds: number[]
+export async function createPost(
+
+    description: string,
+    userId: number,
+    tagIds: number[]
     ): Promise<Post> {
 
     const response = await fetch(`${API_URL}/posts`, {
@@ -74,6 +75,36 @@ export async function getComments(postId: number): Promise<Comment[]> {
     }
 
     return await response.json();
+}
+
+export async function createPostImage(
+
+    url: string,
+    postId: number
+    
+) {
+
+    const response = await fetch(`${API_URL}/postimages`, {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+            url,
+            postId
+        })
+
+    });
+
+    if (!response.ok) {
+        throw new Error("Error al crear la imagen");
+    }
+
+    return await response.json();
+
 }
 
 export async function createComment(
