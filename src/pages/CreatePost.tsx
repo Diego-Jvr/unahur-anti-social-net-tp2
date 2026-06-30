@@ -13,7 +13,7 @@ function CreatePost() {
     const navigate = useNavigate();
 
     const [description, setDescription] = useState("");
-    const [imageUrl, setImageUrl] = useState("");
+    const [imageUrls, setImageUrls] = useState("");
     const [tags, setTags] = useState<Tag[]>([]);
     const [selectedTags, setSelectedTags] = useState<number[]>([]);
 
@@ -53,11 +53,23 @@ function CreatePost() {
 
         try {
 
-            const newPost = await createPost(description, user.id, selectedTags);
-            
-            if (imageUrl.trim()) {
+            const newPost = await createPost(
+                description,
+                user.id,
+                selectedTags
+            );
 
-                await createPostImage (imageUrl,newPost.id);
+            const urls = imageUrls
+                .split("\n")
+                .map(url => url.trim())
+                .filter(url => url !== "");
+
+            for (const url of urls) {
+
+                await createPostImage(
+                    url,
+                    newPost.id
+                );
 
             }
 
@@ -95,15 +107,13 @@ function CreatePost() {
 
             <br />
 
-            <input
-
-                type="text"
+            <textarea
 
                 placeholder="URL de la imagen"
 
-                value={imageUrl}
+                value={imageUrls}
 
-                onChange={(e) => setImageUrl(e.target.value)}
+                onChange={(e) => setImageUrls(e.target.value)}
 
             />
 

@@ -10,7 +10,7 @@ function Navbar() {
 
         <nav>
 
-            <Link to="/">Home</Link>
+            <Link to="/">Inicio</Link>
 
             {" | "}
 
@@ -18,11 +18,11 @@ function Navbar() {
 
                 <>
 
-                    <Link to="/login">Login</Link>
+                    <Link to="/login">Iniciar Sesión</Link>
 
                     {" | "}
 
-                    <Link to="/register">Register</Link>
+                    <Link to="/register">Registrarse</Link>
 
                 </>
 
@@ -30,16 +30,16 @@ function Navbar() {
 
                 <>
 
-                    <Link to="/create-post">Create Post</Link>
+                    <Link to="/create-post">Crear Post</Link>
 
                     {" | "}
 
-                    <Link to="/profile">Profile</Link>
+                    <Link to="/profile">Mi Perfil</Link>
 
                     {" | "}
 
                     <button onClick={logout}>
-                        Logout
+                        Cerrar Sesión
                     </button>
 
                 </>

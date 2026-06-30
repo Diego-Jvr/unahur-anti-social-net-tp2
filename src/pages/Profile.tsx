@@ -2,11 +2,11 @@ import type { Post } from "../types/Post";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { getPosts } from "../services/postService";
-
+import PostCard from "../components/Postcard";
 
 function Profile() {
 
-    const { user, logout } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const [myPosts, setMyPosts] = useState<Post[]>([]);
 
     useEffect(() => {
@@ -38,10 +38,6 @@ function Profile() {
         cargarPosts();
 
     }, [user]);
-    
-    <button onClick={logout}>
-    Cerrar sesión
-    </button>
 
     if (!user) {
 
@@ -79,13 +75,10 @@ function Profile() {
 
                 myPosts.map((post) => (
 
-                    <div key={post.id}>
-
-                        <p>{post.description}</p>
-
-                        <hr />
-
-                    </div>
+                    <PostCard
+                        key={post.id}
+                        post={post}
+                    />
 
                 ))
             )}

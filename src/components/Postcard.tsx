@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
 import type { Post } from "../types/Post";
 import type { PostImage } from "../types/PostImage";
 import type { Comment } from "../types/Comment";
-
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getPostImages, getComments } from "../services/postService";
+
 interface PostCardProps {
     post: Post;
 }
@@ -15,8 +14,9 @@ function PostCard({ post }: PostCardProps) {
     const [images, setImages] = useState<PostImage[]>([]);
     const [comments, setComments] = useState<Comment[]>([]);
 
-    useEffect(() => {
 
+    useEffect(() => {
+        
     const cargarDatos = async () => {
 
         try {
