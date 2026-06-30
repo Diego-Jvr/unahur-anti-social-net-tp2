@@ -6,6 +6,8 @@ import { createPost,createPostImage } from "../services/postService";
 import { useEffect } from "react";
 import { getTags } from "../services/tagService";
 
+import "../styles/Forms.css";
+
 function CreatePost() {
 
     const { user } = useContext(AuthContext);

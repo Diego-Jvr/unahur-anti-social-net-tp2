@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import API_URL from "../services/api";
 
+import "../styles/Forms.css";
+
 function Login() {
 
     const { login } = useContext(AuthContext);

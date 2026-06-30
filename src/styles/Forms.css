@@ -1,0 +1,42 @@
+input,
+textarea {
+
+    width: 100%;
+
+    padding: 10px;
+
+    margin-bottom: 15px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 6px;
+
+    font-size: 15px;
+
+}
+
+textarea {
+
+    min-height: 100px;
+
+    resize: vertical;
+
+}
+
+button {
+
+    padding: 10px 18px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+}
+
+button:hover {
+
+    opacity: .9;
+
+}

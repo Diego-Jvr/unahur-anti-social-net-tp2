@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getPostImages, getComments } from "../services/postService";
 
+import "../styles/PostCard.css";
+
 interface PostCardProps {
     post: Post;
 }
@@ -40,7 +42,7 @@ function PostCard({ post }: PostCardProps) {
 }, [post.id]);
 
     return (
-        <div>
+        <div className="post-card">
 
             <h3>{post.User.nickName}</h3>
 
@@ -58,7 +60,9 @@ function PostCard({ post }: PostCardProps) {
 
             <p>
                 Etiquetas:{" "}
-                {post.Tags.map(tag => tag.name).join(", ")}
+                {post.Tags.length > 0
+                    ? post.Tags.map(tag => tag.name).join(", ")
+                    : "Sin etiquetas"}
             </p>
 
             <p>

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API_URL from "../services/api";
 
+import "../styles/Forms.css";
+
 function Register() {
 
     const navigate = useNavigate();
@@ -9,7 +11,7 @@ function Register() {
     const [email, setEmail] = useState("");
     const handleRegister = async () => {
 
-        if (!nickName || !email) {
+        if (!nickName.trim() || !email.trim()) {
             alert("Completa todos los campos");
             return;
         }

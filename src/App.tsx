@@ -14,29 +14,33 @@ function App() {
     <BrowserRouter>
 
       <Navbar />
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route
-            path="/profile"
-            element={
-                <ProtectedRoute>
-                    <Profile />
-                </ProtectedRoute>
-            }
-        />
-        <Route
-            path="/create-post"
-            element={
-                <ProtectedRoute>
-                    <CreatePost />
-                </ProtectedRoute>
-            }
-        />
-        <Route path="/post/:id" element={<PostDetail />} />
-      </Routes>
+    
+      <main>
+        
+          <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+              path="/profile"
+              element={
+                  <ProtectedRoute>
+                      <Profile />
+                  </ProtectedRoute>
+              }
+          />
+          <Route
+              path="/create-post"
+              element={
+                  <ProtectedRoute>
+                      <CreatePost />
+                  </ProtectedRoute>
+              }
+          />
+          <Route path="/post/:id" element={<PostDetail />} />
+        </Routes>
+        
+      </main>
 
     </BrowserRouter>
   );
